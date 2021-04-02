@@ -33,16 +33,16 @@ class PetsController < ApplicationController
   def update
     pet = Pet.find(params[:id])
     if pet.update(pet_params)
-      redirect_to "/pets/#{pet.id}"
+      redirect_to pet_path(pet)
     else
-      redirect_to "/pets/#{pet.id}/edit"
+      redirect_to edit_pet_path
       flash[:alert] = "Error: #{error_message(pet.errors)}"
     end
   end
 
   def destroy
     Pet.find(params[:id]).destroy
-    redirect_to '/pets'
+    redirect_to pets_path
   end
 
   private

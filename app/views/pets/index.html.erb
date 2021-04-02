@@ -31,7 +31,7 @@
         <td><%= pet.adoptable %></td>
         <td><p>You can find <%= pet.name %> at <%= pet.shelter_name %>!</p></td>
         <td><%= link_to "Edit #{pet.name}", edit_pet_path(pet) %></td>
-        <td><%= link_to "Delete #{pet.name}", pet_path(pet), method: :delete %></td>
+        <td><%= button_to "Delete #{pet.name}", pet_path(pet), method: :delete %></td>
       </tr>
     <% end %>
   </tbody>
