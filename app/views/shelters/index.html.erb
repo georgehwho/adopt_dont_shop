@@ -23,10 +23,10 @@
   </thead>
   <tbody>
     <% @shelters.each do |shelter| %>
-      <tr>
+      <tr id="shelter-<%= shelter.id %>">
         <td><%= link_to shelter.name, shelter_path(shelter) %></td>
         <td><%= shelter.created_at %></td>
-        <td><%= link_to "Edit #{shelter.name}", edit_shelter_path(shelter) %></td>
+        <td><%= link_to "Update #{shelter.name}", edit_shelter_path(shelter) %></td>
         <td><%= link_to "Delete #{shelter.name}", shelter_path(shelter), method: :delete %></td>
       </tr>
     <% end %>
