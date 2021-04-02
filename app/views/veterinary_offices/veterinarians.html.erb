@@ -1,21 +1,38 @@
-<h1>All veterinarians</h1>
+<div class="d-flex justify-content-center">
+  <h1>All veterinarians</h1>
+</div>
 
-<%= link_to "Sort alphabetically", "/veterinary_offices/#{@veterinary_office.id}/veterinarians?sort=alphabetical" %>
+<div class="d-flex justify-content-between">
+  <%= link_to "Sort alphabetically", "/veterinary_offices/#{@veterinary_office.id}/veterinarians?sort=alphabetical" %>
 
-<% @office_vets.each do |vet| %>
-  <section id="veterinarian-<%= vet.id %>">
-    <h3><%= vet.name %></h3>
-    <p>Rating: <%= vet.review_rating %></p>
-    <p>Practice: <%= vet.office_name %></p>
-    <%= link_to "Edit #{vet.name}", "/veterinarians/#{vet.id}/edit" %>
-    <%= link_to "Delete #{vet.name}", "/veterinarians/#{vet.id}", method: :delete %>
-  </section>
-<% end %>
+  <%= form_with url: "/veterinary_offices/#{@veterinary_office.id}/veterinarians", method: :get do |form| %>
+    <%= form.label "Only display veterinarians with a review rating of at least..." %>
+    <%= form.select :review_rating, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] %>
+    <%= form.submit "Filter" %>
+  <% end %>
+</div>
 
-<%= form_with url: "/veterinary_offices/#{@veterinary_office.id}/veterinarians", method: :get do |form| %>
-  <%= form.label "Only display veterinarians with a review rating of at least..." %>
-  <%= form.select :review_rating, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] %>
-  <%= form.submit "Filter" %>
-<% end %>
+<table class="table table-striped table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Rating</th>
+      <th scope="col">Practice</th>
+      <th scope="col">Edit</th>
+      <th scope="col">Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @office_vets.each do |vet| %>
+      <tr id="veterinarian-<%= vet.id %>">
+        <td><p><%= vet.name %></p></td>
+        <td><p><%= vet.review_rating %></p></td>
+        <td><p><%= vet.office_name %></p></td>
+        <td><%= link_to "Edit #{vet.name}", edit_veterinarian_path(vet) %></td>
+        <td><%= link_to "Delete #{vet.name}", veterinarian_path(vet), method: :delete %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
-<p><%= link_to "Create a Veterinarian", "/veterinary_offices/#{@veterinary_office.id}/veterinarians/new" %></p>
+<p><%= link_to "Create a Veterinarian", new_veterinarian_path %></p>

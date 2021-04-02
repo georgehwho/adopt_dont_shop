@@ -1,13 +1,32 @@
-<h1>All Veterinary Offices</h1>
+<div class="d-flex justify-content-center">
+  <h1>All Veterinary Offices</h1>
+</div>
 
-<%= link_to "Sort by number of veterinarians",
-  'veterinary_offices?sort=veterinarian_count' %>
+<div class="d-flex justify-content-between">
+  <%= link_to "Sort by number of veterinarians", 'veterinary_offices?sort=veterinarian_count' %>
+</div>
 
-<% @veterinary_offices.each do |office| %>
-  <div id="veterinary-office-<%= office.id %>">
-    <h3><%= office.name %></h3>
-    <p>Created at: <%= office.created_at %></p>
-    <%= link_to "Update #{office.name}", "/veterinary_offices/#{office.id}/edit" %>
-    <%= link_to "Delete #{office.name}", "/veterinary_offices/#{office.id}", method: :delete %>
-  </div>
-<% end %>
+<table class="table table-striped table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Created At</th>
+      <th scope="col">Edit</th>
+      <th scope="col">Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @veterinary_offices.each do |veterinary_office| %>
+      <tr id="veterinary-office-<%= veterinary_office.id %>">
+        <td><%= link_to veterinary_office.name, veterinary_office_path(veterinary_office) %></td>
+        <td><%= veterinary_office.created_at %></td>
+        <td><%= link_to "Update #{veterinary_office.name}", edit_veterinary_office_path(veterinary_office) %></td>
+        <td><%= link_to "Delete #{veterinary_office.name}", veterinary_office_path(veterinary_office), method: :delete %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<div>
+  <%= link_to 'New Veterinary Office', new_veterinary_office_path %>
+</div>
