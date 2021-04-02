@@ -21,15 +21,14 @@
   <tbody>
     <% @pets.each do |pet| %>
       <tr>
-        <td><p><%= pet.name %></p></td>
-        <td><p>Age: <%= pet.age %></p></td>
-        <td><p>Breed: <%= pet.breed %></p></td>
-        <td><p>Adoptable: </p></td>
+        <td><%= pet.name %></td>
+        <td><%= pet.age %></td>
+        <td><%= pet.breed %></td>
+        <td><%= pet.adoptable %></td>
         <td><p>You can find <%= pet.name %> at <%= pet.shelter_name %>!</p></td>
         <td><%= link_to "Edit #{pet.name}", "/pets/#{pet.id}/edit" %></td>
         <td><%= link_to "Delete #{pet.name}", "/pets/#{pet.id}", method: :delete %></td>
       </tr>
     <% end %>
   </tbody>
-
 </table>
