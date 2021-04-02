@@ -19,7 +19,7 @@
         <td><p><%= vet.review_rating %></p></td>
         <td><p><%= vet.office_name %></p></td>
         <td><%= link_to "Edit #{vet.name}", edit_veterinarian_path(vet) %></td>
-        <td><%= link_to "Delete #{vet.name}", veterinarian_path(vet), method: :delete %></td>
+        <td><%= button_to "Delete #{vet.name}", veterinarian_path(vet), method: :delete %></td>
       </tr>
     <% end %>
   </tbody>
