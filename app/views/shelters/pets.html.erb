@@ -28,8 +28,8 @@
     <% @shelter_pets.each do |pet| %>
       <tr>
         <td><p><%= pet.name %></p></td>
-        <td><p>Age: <%= pet.age %></p></td>
-        <td><p>Breed: <%= pet.breed %></p></td>
+        <td><p><%= pet.age %></p></td>
+        <td><p><%= pet.breed %></p></td>
         <td><p><%= pet.name %> can be adopted from <%= @shelter.name %>!</p></td>
         <td><%= link_to "Edit #{pet.name}", edit_pet_path(pet) %></td>
         <td><%= link_to "Delete #{pet.name}", pet_path(pet), method: :delete %></td>
@@ -37,6 +37,5 @@
     <% end %>
   </tbody>
 </table>
-
 
 <p><%= link_to "Create a Pet", new_pet_path %></p>
