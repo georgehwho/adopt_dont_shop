@@ -29,15 +29,15 @@ RSpec.describe 'the veterinary offices index' do
     expect(mid).to appear_before(oldest)
 
     within "#veterinary-office-#{@vet_office_1.id}" do
-      expect(page).to have_content("Created at: #{@vet_office_1.created_at}")
+      expect(page).to have_content("#{@vet_office_1.created_at}")
     end
 
     within "#veterinary-office-#{@vet_office_2.id}" do
-      expect(page).to have_content("Created at: #{@vet_office_2.created_at}")
+      expect(page).to have_content("#{@vet_office_2.created_at}")
     end
 
     within "#veterinary-office-#{@vet_office_3.id}" do
-      expect(page).to have_content("Created at: #{@vet_office_3.created_at}")
+      expect(page).to have_content("#{@vet_office_3.created_at}")
     end
   end
 
