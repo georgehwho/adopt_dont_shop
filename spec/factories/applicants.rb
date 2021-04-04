@@ -5,8 +5,5 @@ FactoryBot.define do
     city { "MyString" }
     state { "MyString" }
     zip_code { "MyString" }
-    description { "MyText" }
-    status { "MyString" }
-    pet { nil }
   end
 end
