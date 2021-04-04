@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :application do
+  factory :applicant do
     name { "MyString" }
     address { "MyString" }
     city { "MyString" }
