@@ -8,15 +8,15 @@ RSpec.describe 'the application show' do
   end
 
   it "shows the application and all it's attributes" do
-    binding.pry
-    visit "/application/#{@application.id}"
+    visit "/applications/#{@application.id}"
 
-    expect(page).to have_content(@applicant.name)
-    expect(page).to have_content(@applicant.address)
-    expect(page).to have_content(@applicant.city)
-    expect(page).to have_content(@applicant.state)
-    expect(page).to have_content(@applicant.zip_code)
+    expect(page).to have_content(@application.name)
+    expect(page).to have_content(@application.address)
+    expect(page).to have_content(@application.city)
+    expect(page).to have_content(@application.state)
+    expect(page).to have_content(@application.zip_code)
     expect(page).to have_content(@application.description)
+    expect(page).to have_link(@pet.name)
     expect(page).to have_content(@application.status)
   end
 end

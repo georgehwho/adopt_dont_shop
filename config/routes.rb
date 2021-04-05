@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root to: 'application#welcome'
 
-  get '/applicants/:id', to: 'applicants#show', as: 'applicant'
+  get '/applications/:id', to: 'applications#show', as: 'application'
 
   get '/shelters', to: 'shelters#index'
   get '/shelters/new', to: 'shelters#new', as: 'new_shelter'
