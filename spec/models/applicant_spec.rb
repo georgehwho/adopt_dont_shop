@@ -1,5 +1,8 @@
 require 'rails_helper'
 
-RSpec.describe Application, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+RSpec.describe Applicant, type: :model do
+  describe 'relationships' do
+    it { should have_many(:applications) }
+    it { should have_many(:pets) }
+  end
 end
