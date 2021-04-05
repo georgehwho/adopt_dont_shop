@@ -28,11 +28,11 @@ ActiveRecord::Schema.define(version: 2021_04_04_021341) do
   end
 
   create_table "pet_applications", force: :cascade do |t|
-    t.bigint "applications_id"
+    t.bigint "application_id"
     t.bigint "pet_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["applications_id"], name: "index_pet_applications_on_applications_id"
+    t.index ["application_id"], name: "index_pet_applications_on_application_id"
     t.index ["pet_id"], name: "index_pet_applications_on_pet_id"
   end
 
@@ -74,7 +74,7 @@ ActiveRecord::Schema.define(version: 2021_04_04_021341) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "pet_applications", "applications", column: "applications_id"
+  add_foreign_key "pet_applications", "applications"
   add_foreign_key "pet_applications", "pets"
   add_foreign_key "pets", "shelters"
   add_foreign_key "veterinarians", "veterinary_offices"

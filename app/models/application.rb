@@ -1,6 +1,6 @@
 class Application < ApplicationRecord
   validates :status, acceptance: { accept: ["In Progress", "Pending", "Accepted", "Rejected"] }
 
-  belongs_to :applicant
-  belongs_to :pet
+  has_many :pet_applications
+  has_many :pets, through: :pet_applications
 end
