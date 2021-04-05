@@ -6,13 +6,13 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-10.times do
+5.times do
   Shelter.create do |shelter|
     shelter.name = Faker::Company.name
     shelter.city = Faker::Address.city
     shelter.foster_program = [true, false].sample
     shelter.rank = rand(1..10)
-    20.times do
+    5.times do
       shelter.pets.new do |pet|
         pet.name = Faker::Creature::Dog.name
         pet.breed = Faker::Creature::Dog.breed
@@ -21,16 +21,13 @@
       end
     end
   end
-  VeterinaryOffice.create do |vet_office|
-    vet_office.name = Faker::Games::Pokemon.location
-    vet_office.boarding_services = [true, false].sample
-    vet_office.max_patient_capacity = rand(50..100)
-    20.times do
-      vet_office.veterinarians.new do |vet|
-        vet.name = Faker::Games::WorldOfWarcraft.hero
-        vet.on_call = [true, false].sample
-        vet.review_rating = rand(1..10)
-      end
-    end
+  Application.create do |app|
+    app.name = Faker::Name.name
+    app.address = Faker::Address.street_address
+    app.city = Faker::Address.city
+    app.state = Faker::Address.state
+    app.zip_code = Faker::Address.zip
+    app.description = Faker::Food.description
+    app.status = ["In Progress", "Pending", "Accepted", "Rejected"].sample
   end
 end
