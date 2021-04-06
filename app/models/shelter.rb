@@ -5,6 +5,7 @@ class Shelter < ApplicationRecord
 
   has_many :pets, dependent: :destroy
 
+
   def self.order_by_recently_created
     order(created_at: :desc)
   end
@@ -18,6 +19,10 @@ class Shelter < ApplicationRecord
 
   def self.order_by_name_reverse
     find_by_sql(["SELECT * FROM shelters ORDER BY name DESC"]) ## come back to this later for sql
+  end
+
+  def self.with_pending_applications
+    joins(pets: [:applications]).where("status='Pending'").distinct
   end
 
   def pet_count

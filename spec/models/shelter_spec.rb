@@ -47,6 +47,16 @@ RSpec.describe Shelter, type: :model do
         expect(Shelter.order_by_name_reverse).to eq([@shelter_2, @shelter_3, @shelter_1])
       end
     end
+
+    describe '#with_pending_applications' do
+      it 'orders the shlters by name, descending' do
+        pet = create(:random_pet)
+        app = create(:random_application, status: "Pending")
+        pet.applications << app
+        @shelter_1.pets << pet
+        expect(Shelter.with_pending_applications).to eq([@shelter_1])
+      end
+    end
   end
 
   describe 'instance methods' do
