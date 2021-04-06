@@ -16,7 +16,6 @@ RSpec.describe 'the application show' do
     expect(page).to have_content(@application.city)
     expect(page).to have_content(@application.state)
     expect(page).to have_content(@application.zip_code)
-    expect(page).to have_content(@application.description)
     expect(page).to have_link(@pet.name)
     expect(page).to have_content(@application.status)
   end
@@ -46,5 +45,22 @@ RSpec.describe 'the application show' do
     within "#application-pets" do
       expect(page).to have_content(@pet_2.name)
     end
+  end
+
+  it 'can submit a description' do
+    visit "/applications/#{@application.id}"
+
+    expect(page).to have_content("In Progress")
+    fill_in "Description", with: 'i like animals'
+    click_on("Save")
+    expect(page).to have_content("Pending")
+  end
+
+  it 'throws an error if there is no description' do
+    visit "/applications/#{@application.id}"
+
+    click_on("Save")
+
+    expect(page).to have_content("Error: Description can't be blank")
   end
 end
