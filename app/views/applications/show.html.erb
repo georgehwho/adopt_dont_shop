@@ -19,9 +19,9 @@
       <th scope="col">Breed</th>
     </tr>
   </thead>
-  <tbody>
+  <tbody id="application-pets">
     <% @application.pets.each do |pet| %>
-      <tr>
+      <tr id="pet-<%= pet.id %>">
         <td><%= link_to pet.name, pet_path(pet) %></td>
         <td><p><%= pet.age %> years old</p></td>
         <td><p><%= pet.breed %></p></td>
@@ -56,7 +56,7 @@
   </thead>
   <tbody>
     <% @pets.each do |pet| %>
-      <tr>
+      <tr id="adoptable-pet-<%= pet.id %>">
         <td><%= link_to pet.name, pet_path(pet) %></td>
         <td><p><%= pet.age %> years old</p></td>
         <td><p><%= pet.breed %></p></td>
