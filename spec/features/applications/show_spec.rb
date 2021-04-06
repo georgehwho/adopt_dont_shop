@@ -3,7 +3,8 @@ require 'rails_helper'
 RSpec.describe 'the application show' do
   before :each do
     @pet = create(:random_pet)
-    @application = create(:random_application)
+    @pet_2 = create(:random_pet)
+    @application = create(:random_application, status: "In Progress")
     @application.pets << @pet
   end
 
@@ -18,5 +19,16 @@ RSpec.describe 'the application show' do
     expect(page).to have_content(@application.description)
     expect(page).to have_link(@pet.name)
     expect(page).to have_content(@application.status)
+  end
+
+  it 'has a working pet search bar' do
+    visit "/applications/#{@application.id}"
+
+    expect(page).to have_button("Search")
+    expect(page).to have_content(@pet_2.name)
+
+    fill_in 'Search', with: @pet.name
+    click_on("Search")
+    expect(page).to_not have_content(@pet_2.name)
   end
 end

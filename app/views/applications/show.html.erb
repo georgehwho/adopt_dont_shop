@@ -1,9 +1,15 @@
-<h1><%= @application.name %></h1>
-<h3><%= @application.address %></h3>
-<h3><%= @application.city %></h3>
-<h3><%= @application.state %></h3>
-<h3><%= @application.zip_code %></h3>
-<h3><%= @application.description %></h3>
+<h1>Name: <%= @application.name %></h1>
+<h3>Address: <%= @application.address %></h3>
+<h3>City: <%= @application.city %></h3>
+<h3>State: <%= @application.state %></h3>
+<h3>Zip code: <%= @application.zip_code %></h3>
+<h3>Description: <%= @application.description %></h3>
+
+<br>
+
+<div class="d-flex justify-content-center">
+  <h1>All Pets on this Application</h1>
+</div>
 
 <table class="table table-striped table-bordered">
   <thead>
@@ -25,3 +31,36 @@
 </table>
 
 <h3><%= @application.status %></h3>
+
+<% if @application.status == "In Progress" %>
+  <div class="d-flex justify-content-center">
+    <h1>Add a Pet to this Application</h1>
+  </div>
+
+  <div class="d-flex justify-content-between">
+    <%= form_with url: application_path(@application), method: :get, local: true do |f| %>
+      <%= f.label :search %>
+      <%= f.text_field :search %>
+      <%= f.submit "Search" %>
+    <% end %>
+  </div>
+
+  <table class="table table-striped table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Age</th>
+      <th scope="col">Breed</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @pets.each do |pet| %>
+      <tr>
+        <td><%= link_to pet.name, pet_path(pet) %></td>
+        <td><p><%= pet.age %> years old</p></td>
+        <td><p><%= pet.breed %></p></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<% end %>
