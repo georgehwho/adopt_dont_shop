@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'the application show' do
   before :each do
     @pet = create(:random_pet)
-    @pet_2 = create(:random_pet)
+    @pet_2 = create(:random_pet, adoptable: true)
     @application = create(:random_application, status: "In Progress")
     @application.pets << @pet
   end
@@ -30,5 +30,21 @@ RSpec.describe 'the application show' do
     fill_in 'Search', with: @pet.name
     click_on("Search")
     expect(page).to_not have_content(@pet_2.name)
+  end
+
+  it 'can add a pet to the application' do
+    visit "/applications/#{@application.id}"
+
+    within "#application-pets" do
+      expect(page).to_not have_content(@pet_2.name)
+    end
+
+    within "#adoptable-pet-#{ @pet_2.id }" do
+      click_on "Adopt this Pet"
+    end
+
+    within "#application-pets" do
+      expect(page).to have_content(@pet_2.name)
+    end
   end
 end
