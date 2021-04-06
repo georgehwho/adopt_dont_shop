@@ -22,6 +22,17 @@ class ApplicationsController < ApplicationController
     end
   end
 
+  def update
+    application = Application.find(params[:id])
+    params[:status] = "Pending"
+    if application.update(application_params.merge(:submit_app => true))
+      redirect_to "/applications/#{application.id}"
+    else
+      redirect_to "/applications/#{application.id}"
+      flash[:alert] = "Error: #{error_message(application.errors)}"
+    end
+  end
+
   private
 
   def application_params

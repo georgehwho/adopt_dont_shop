@@ -3,7 +3,9 @@
 <h3>City: <%= @application.city %></h3>
 <h3>State: <%= @application.state %></h3>
 <h3>Zip code: <%= @application.zip_code %></h3>
-<h3>Description: <%= @application.description %></h3>
+<% if @application.status != "In Progress" %>
+  <h3>Description: <%= @application.description %></h3>
+<% end %>
 
 <br>
 
@@ -30,11 +32,33 @@
   </tbody>
 </table>
 
-<h3><%= @application.status %></h3>
+<h3>Status: <%= @application.status %></h3>
+
+
 
 <% if @application.status == "In Progress" %>
   <div class="d-flex justify-content-center">
-    <h1>Add a Pet to this Application</h1>
+    <h1>"In Progress" Application Settings</h1>
+  </div>
+
+  <% if @application.pets.count > 0 %>
+  <br>
+    <div class="d-flex justify-content-center">
+      <h3>Why would you be a good owner?</h3>
+    </div>
+    <div class="d-flex justify-content-center">
+      <%= form_with url: "/applications/#{@application.id}", method: :patch, local: true do |f| %>
+        <%= f.label :description %>
+        <%= f.text_area :description %>
+
+        <%= f.submit %>
+      <% end %>
+    </div>
+  <br>
+  <% end %>
+
+  <div class="d-flex justify-content-center">
+    <h3>Add a Pet to this Application</h3>
   </div>
 
   <div class="d-flex justify-content-between">
