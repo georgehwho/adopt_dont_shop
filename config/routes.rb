@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   root to: 'application#welcome'
 
+  get '/applications/new', to: 'applications#new', as: 'new_application'
   get '/applications/:id', to: 'applications#show', as: 'application'
+  post '/applications', to: 'applications#create'
 
   get '/shelters', to: 'shelters#index'
   get '/shelters/new', to: 'shelters#new', as: 'new_shelter'
@@ -38,4 +40,5 @@ Rails.application.routes.draw do
   get '/veterinary_offices/:veterinary_office_id/veterinarians', to: 'veterinary_offices#veterinarians'
   get '/veterinary_offices/:veterinary_office_id/veterinarians/new', to: 'veterinarians#new', as: 'new_veterinarian'
   post '/veterinary_offices/:veterinary_office_id/veterinarians', to: 'veterinarians#create'
+
 end
