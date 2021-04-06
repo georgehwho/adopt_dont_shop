@@ -11,9 +11,9 @@ class ApplicationsController < ApplicationController
 
     if application.save
       redirect_to "/applications/#{application.id}"
-    # else
-    #   redirect_to "/shelters/#{application_params[:shelter_id]}/pets/new"
-    #   flash[:alert] = "Error: #{error_message(application.errors)}"
+    else
+      redirect_to "/applications/new"
+      flash[:alert] = "Error: #{error_message(application.errors)}"
     end
   end
 
