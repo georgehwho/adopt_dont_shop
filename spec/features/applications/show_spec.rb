@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'the application show' do
   before :each do
     @pet = create(:random_pet)
-    @pet_2 = create(:random_pet)
+    @pet_2 = create(:random_pet, adoptable: true)
     @application = create(:random_application, status: "In Progress")
     @application.pets << @pet
   end
