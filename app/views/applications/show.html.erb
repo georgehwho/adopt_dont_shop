@@ -51,6 +51,7 @@
       <th scope="col">Name</th>
       <th scope="col">Age</th>
       <th scope="col">Breed</th>
+      <th scope="col">Adopt?</th>
     </tr>
   </thead>
   <tbody>
@@ -59,6 +60,13 @@
         <td><%= link_to pet.name, pet_path(pet) %></td>
         <td><p><%= pet.age %> years old</p></td>
         <td><p><%= pet.breed %></p></td>
+        <td>
+          <%= form_with url: pet_applications_path, method: :create, local: true do |f| %>
+            <%= f.hidden_field :pet_id, :value => pet.id %>
+            <%= f.hidden_field :application_id, :value => @application.id %>
+            <%= f.submit "Adopt this Pet" %>
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>
