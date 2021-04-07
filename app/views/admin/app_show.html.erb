@@ -1,0 +1,44 @@
+<h1>Name: <%= @application.name %></h1>
+<h3>Address: <%= @application.address %></h3>
+<h3>City: <%= @application.city %></h3>
+<h3>State: <%= @application.state %></h3>
+<h3>Zip code: <%= @application.zip_code %></h3>
+
+<br>
+
+<div class="d-flex justify-content-center">
+  <h1>All Pets on this Application</h1>
+</div>
+
+<table class="table table-striped table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Age</th>
+      <th scope="col">Breed</th>
+      <th scope="col">Status</th>
+    </tr>
+  </thead>
+  <tbody id="application-pets">
+    <% @application.pets.each_with_index do |pet, i| %>
+      <tr id="pet-<%= pet.id %>">
+        <td><%= link_to pet.name, pet_path(pet) %></td>
+        <td><p><%= pet.age %> years old</p></td>
+        <td><p><%= pet.breed %></p></td>
+        <td>
+          <% if @application.pet_applications[i].status == "Pending" %>
+            <%= form_with url: pet_applications_path, method: :patch, local: true do |f| %>
+              <%= f.hidden_field :pet_id, :value => pet.id %>
+              <%= f.hidden_field :application_id, :value => @application.id %>
+              <%= f.submit "Adopt this Pet" %>
+            <% end %>
+          <% else %>
+            <p><%= @application.pet_applications[i].status %></p></td>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<h3>Status: <%= @application.status %></h3>
