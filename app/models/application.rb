@@ -11,4 +11,16 @@ class Application < ApplicationRecord
 
   has_many :pet_applications
   has_many :pets, through: :pet_applications
+
+  def all_pets_accepted?
+    pet_applications.all? { |app| app.status == "Accepted" }
+  end
+
+  def no_pets_pending?
+    pet_applications.all? { |app| app.status != "Pending" }
+  end
+
+  def any_pets_rejected?
+    pet_applications.any? { |app| app.status == "Rejected" }
+  end
 end
