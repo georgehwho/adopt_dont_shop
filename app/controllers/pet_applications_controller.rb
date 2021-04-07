@@ -11,7 +11,7 @@ class PetApplicationsController < ApplicationController
   def update
     @application = Application.find(params[:application_id])
     pet_app = PetApplication.where(pet_id: params[:pet_id], application_id: @application.id)
-    pet_app.update(status: "Accepted")
+    pet_app.update(status: params[:status_update])
     redirect_to admin_app_path(@application)
   end
 end
