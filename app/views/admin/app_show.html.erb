@@ -28,13 +28,23 @@
         <td><p><%= pet.breed %></p></td>
         <td>
           <% if @application.pet_applications[i].status == "Pending" %>
-            <%= form_with url: pet_applications_path, method: :patch, local: true do |f| %>
-              <%= f.hidden_field :pet_id, :value => pet.id %>
-              <%= f.hidden_field :application_id, :value => @application.id %>
-              <%= f.submit "Adopt this Pet" %>
-            <% end %>
+            <div class="d-flex justify-content-around">
+              <%= form_with url: pet_applications_path, method: :patch, local: true do |f| %>
+                <%= f.hidden_field :pet_id, :value => pet.id %>
+                <%= f.hidden_field :application_id, :value => @application.id %>
+                <%= f.hidden_field :status_update, :value => "Accepted" %>
+                <%= f.submit "Adopt this Pet" %>
+              <% end %>
+
+              <%= form_with url: pet_applications_path, method: :patch, local: true do |f| %>
+                <%= f.hidden_field :pet_id, :value => pet.id %>
+                <%= f.hidden_field :application_id, :value => @application.id %>
+                <%= f.hidden_field :status_update, :value => "Rejected" %>
+                <%= f.submit "Reject this Pet" %>
+              <% end %>
           <% else %>
-            <p><%= @application.pet_applications[i].status %></p></td>
+              <p><%= @application.pet_applications[i].status %></p></td>
+            </div>
           <% end %>
         </td>
       </tr>

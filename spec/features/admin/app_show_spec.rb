@@ -18,19 +18,30 @@ describe 'admin application show page' do
     expect(page).to have_content(@app_1.description)
   end
 
-  it 'does not show accept from the start' do
+  it 'does not show accept or rejectfrom the start' do
     visit "admin/applications/#{@app_1.id}"
 
     expect(page).to_not have_content("Accepted")
+    expect(page).to_not have_content("Rejected")
     expect(page).to have_button("Adopt this Pet")
+    expect(page).to have_button("Reject this Pet")
   end
 
-  it 'shows accepted for the pet once the button is pressed' do
+  it 'shows accepted for the pet once the accept button is pressed' do
     visit "admin/applications/#{@app_1.id}"
 
     click_on("Adopt this Pet")
 
     expect(page).to have_content("Accepted")
     expect(page).to_not have_button("Adopt this Pet")
+  end
+
+  it 'shows rejected for the pet once the reject button is pressed' do
+    visit "admin/applications/#{@app_1.id}"
+
+    click_on("Reject this Pet")
+
+    expect(page).to have_content("Rejected")
+    expect(page).to_not have_button("Reject this Pet")
   end
 end
