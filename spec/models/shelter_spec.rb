@@ -89,9 +89,16 @@ RSpec.describe Shelter, type: :model do
         expect(@shelter_1.pet_count).to eq(3)
       end
     end
+
     describe '.full_address' do
       it 'returns only the name and the city of given shelter' do
         expect(@shelter_1.full_address[0].name).to eq(@shelter_1.name)
+      end
+    end
+
+    describe '.pet_average_age' do
+      it 'returns the average age of pets at the given shelter' do
+        expect(@shelter_1.pet_average_age).to eq(4.33)
       end
     end
   end
