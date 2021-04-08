@@ -40,5 +40,11 @@ RSpec.describe Pet, type: :model do
         expect(@pet_3.shelter_name).to eq(@shelter_1.name)
       end
     end
+
+    describe '.toggle_adoptable' do
+      it 'changed adoptable to false' do
+        expect(@pet_1.toggle_adoptable).to eq(@pet_1.adoptable == false)
+      end
+    end
   end
 end

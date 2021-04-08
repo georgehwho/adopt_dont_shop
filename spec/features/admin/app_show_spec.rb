@@ -54,6 +54,7 @@ describe 'admin application show page' do
       click_on("Adopt this Pet")
 
       expect(page).to have_content("Status: Accepted")
+      expect(Pet.find(@pet.id).adoptable).to eq(false)
     end
 
     it 'has status as rejected if any apps are rejected' do
