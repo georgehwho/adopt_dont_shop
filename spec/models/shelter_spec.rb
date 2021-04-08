@@ -48,6 +48,12 @@ RSpec.describe Shelter, type: :model do
       end
     end
 
+    describe '#order_by_name' do
+      it 'orders the shlters by name' do
+        expect(Shelter.order_by_name).to eq([@shelter_1, @shelter_3, @shelter_2])
+      end
+    end
+
     describe '#with_pending_applications' do
       it 'orders the shlters by name, descending' do
         pet = create(:random_pet)
