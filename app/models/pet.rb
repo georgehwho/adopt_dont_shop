@@ -22,4 +22,8 @@ class Pet < ApplicationRecord
   def self.with_approved_applications
     joins(:applications).where("applications.status='Accepted'").count
   end
+
+  def self.with_pending_applications
+    joins(:applications).where("applications.status='Pending'")
+  end
 end
