@@ -76,4 +76,19 @@ describe 'admin application show page' do
       expect(page).to have_content("Status: Rejected")
     end
   end
+
+  describe 'if one app gets approved, another app will not show the accept button' do
+    it 'shows this pet is not available for adoption anymore' do
+      app_2 = create(:random_application, status: "Pending")
+      app_2.pets << @pet
+
+      visit "admin/applications/#{@app_1.id}"
+
+      click_on("Adopt this Pet")
+
+      visit "admin/applications/#{app_2.id}"
+
+      expect(page).to have_content("this pet has been approved for adoption")
+    end
+  end
 end

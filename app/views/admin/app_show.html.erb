@@ -29,11 +29,15 @@
         <td>
           <% if @application.pet_applications[i].status == "Pending" %>
             <div class="d-flex justify-content-around">
-              <%= form_with url: pet_applications_path, method: :patch, local: true do |f| %>
-                <%= f.hidden_field :pet_id, :value => pet.id %>
-                <%= f.hidden_field :application_id, :value => @application.id %>
-                <%= f.hidden_field :status_update, :value => "Accepted" %>
-                <%= f.submit "Adopt this Pet" %>
+              <% if pet.adoptable %>
+                <%= form_with url: pet_applications_path, method: :patch, local: true do |f| %>
+                  <%= f.hidden_field :pet_id, :value => pet.id %>
+                  <%= f.hidden_field :application_id, :value => @application.id %>
+                  <%= f.hidden_field :status_update, :value => "Accepted" %>
+                  <%= f.submit "Adopt this Pet" %>
+                <% end %>
+              <% else %>
+                <p>this pet has been approved for adoption</p>
               <% end %>
 
               <%= form_with url: pet_applications_path, method: :patch, local: true do |f| %>
