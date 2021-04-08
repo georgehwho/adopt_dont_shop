@@ -48,6 +48,12 @@ RSpec.describe Shelter, type: :model do
       end
     end
 
+    describe '#order_by_name' do
+      it 'orders the shlters by name' do
+        expect(Shelter.order_by_name).to eq([@shelter_1, @shelter_3, @shelter_2])
+      end
+    end
+
     describe '#with_pending_applications' do
       it 'orders the shlters by name, descending' do
         pet = create(:random_pet)
@@ -83,9 +89,22 @@ RSpec.describe Shelter, type: :model do
         expect(@shelter_1.pet_count).to eq(3)
       end
     end
+
     describe '.full_address' do
       it 'returns only the name and the city of given shelter' do
         expect(@shelter_1.full_address[0].name).to eq(@shelter_1.name)
+      end
+    end
+
+    describe '.pet_average_age' do
+      it 'returns the average age of pets at the given shelter' do
+        expect(@shelter_1.pet_average_age).to eq(4.33)
+      end
+    end
+
+    describe '.adoptablepet_count' do
+      it 'returns the number of adoptable pets at the given shelter' do
+        expect(@shelter_1.adoptable_pet_count).to eq(2)
       end
     end
   end

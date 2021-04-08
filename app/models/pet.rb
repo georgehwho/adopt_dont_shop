@@ -15,6 +15,14 @@ class Pet < ApplicationRecord
     where(adoptable: true)
   end
 
+  def self.with_approved_applications
+    joins(:applications).where("applications.status='Accepted'").count
+  end
+
+  def self.with_pending_applications
+    joins(:applications).where("applications.status='Pending'").distinct
+  end
+
   def toggle_adoptable
     toggle!(:adoptable)
   end

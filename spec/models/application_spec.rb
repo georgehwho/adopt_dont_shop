@@ -7,8 +7,8 @@ RSpec.describe Application, type: :model do
   end
 
   before(:each) do
-    @app_1 = create(:random_application)
-    @app_2 = create(:random_application)
+    @app_1 = create(:random_application, status: "Pending")
+    @app_2 = create(:random_application, status: "Pending")
 
     @pet_1 = create(:random_pet)
     @pet_2 = create(:random_pet)
@@ -17,6 +17,14 @@ RSpec.describe Application, type: :model do
     @app_1.pets << @pet_2
 
     @app_1_pets = @app_1.pet_applications
+  end
+
+  describe 'class methods' do
+    describe '#pending' do
+      it 'returns all the pending applications' do
+        expect(Application.pending).to eq([@app_1, @app_2])
+      end
+    end
   end
 
   describe 'instance methods' do

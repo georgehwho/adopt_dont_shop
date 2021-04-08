@@ -32,6 +32,22 @@ RSpec.describe Pet, type: :model do
         expect(Pet.adoptable).to eq([@pet_1, @pet_2])
       end
     end
+
+    describe '#with_approved_applications' do
+      it 'returns count of pets with approved applications' do
+        app = create(:random_application, status: "Accepted")
+        app.pets << @pet_1
+        expect(Pet.with_approved_applications).to eq(1)
+      end
+    end
+
+    describe '#with_pending_applications' do
+      it 'returns pets with pending applications' do
+        app = create(:random_application, status: "Pending")
+        app.pets << @pet_1
+        expect(Pet.with_pending_applications).to eq([@pet_1])
+      end
+    end
   end
 
   describe 'instance methods' do
