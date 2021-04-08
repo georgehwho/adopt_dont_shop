@@ -29,6 +29,10 @@ class Shelter < ApplicationRecord
     pets.count
   end
 
+  def full_address
+    Shelter.find_by_sql(["SELECT name, city FROM shelters WHERE id='#{self.id}'"])
+  end
+
   def adoptable_pets
     pets.where(adoptable: true)
   end

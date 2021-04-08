@@ -25,6 +25,6 @@ class PetApplicationsController < ApplicationController
         @application.update(status: "Rejected")
       end
     end
-    render "/admin/app_show"
+    render "/admin/applications/show"
   end
 end
