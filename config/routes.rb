@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   # get '/admin/applications/:app_id', to: 'admin#app_show', as: 'admin_app'
 
   namespace :admin do
-    resources :shelters, only: [:index]
+    resources :shelters, only: [:index, :show]
     resources :applications, only: [:show]
   end
 
