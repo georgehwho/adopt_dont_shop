@@ -14,11 +14,17 @@ class PetApplicationsController < ApplicationController
     pet_app.update(status: params[:status_update])
 
     if @application.no_pets_pending?
-      @application.update(status: "Accepted") if @application.all_pets_accepted?
-      @application.update(status: "Rejected") if @application.any_pets_rejected?
-      redirect_to admin_app_path(@application)
-    else
-      redirect_to admin_app_path(@application)
+      if @application.all_pets_accepted?
+        # @application.pets.each { |pet| pet.toggle_adoptable }
+        pets = Pet.select("pets.*").joins(:applications).where("applications.id=#{@application.id}")
+        pets.each {|pet| pet.toggle_adoptable }
+        @application.update(status: "Accepted")
+      end
+
+      if @application.any_pets_rejected?
+        @application.update(status: "Rejected")
+      end
     end
+    render "/admin/app_show"
   end
 end
