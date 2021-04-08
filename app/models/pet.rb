@@ -18,4 +18,8 @@ class Pet < ApplicationRecord
   def toggle_adoptable
     toggle!(:adoptable)
   end
+
+  def self.with_approved_applications
+    joins(:applications).where("applications.status='Accepted'").count
+  end
 end
